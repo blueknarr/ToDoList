@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.programmers.todo.dao.mapper.todoMapper">
+ 
+    <resultMap type="todo" id="todoResult">
+		<result column="no" property="no"/>
+		<result column="title" property="title"/>
+		<result column="state" property="state"/>
+		<result column="content" property="content"/>
+		<result column="priority" property="priority"/>
+		<result column="regdate" property="regDate"/>
+		<result column="dldate" property="dlDate"/>
+	</resultMap>
+	
+	<select id="insertToDoList" resultMap="todoResult">
+		"INSERT INTO todo VALUES (100,#{title},#{state},#{content},#{priority},#{regDate},#{dlDate})";
+	</select>
+	<select id="updateToDoList" resultType="todo">
+		UPDATE todo SET title=#{title}, state=#{state},content=#{content},priority=#{priority},regdate=#{regdate}, dldate={dldate} WHERE no=#{no};
+	</select>
+	<select id="deleteToDoList" resultType="todo">
+		DELETE FROM todo WHERE title=#{title}
+	</select>
+	
+	<select id="selectDoneList" resultType="todo">
+		SELECT * FROM todo WHERE STATE=0 AND PRIORITY=0
+	</select>
+	<select id="selectPriDoneList" resultType="todo">
+		SELECT * FROM todo WHERE STATE=0 AND PRIORITY=1
+	</select>
+	<select id="selectNowList" resultType="todo">
+		SELECT * FROM todo WHERE STATE=1 AND PRIORITY=0
+	</select>
+	<select id="selectPriNowList" resultType="todo">
+		SELECT * FROM todo WHERE STATE=1 AND PRIORITY=1
+	</select>
+	<select id="selectLaterList" resultType="todo">
+		SELECT * FROM todo WHERE STATE=2 AND PRIORITY=0
+	</select>
+	<select id="selectPriLaterList" resultType="todo">
+		SELECT * FROM todo WHERE STATE=2 AND PRIORITY=1
+	</select>
+	<select id="selectAllList" resultType="todo">
+		SELECT * FROM todo
+	</select>
+    
+</mapper>
